@@ -10,4 +10,4 @@ In the file R_healthcare_analysis.md you will find the code using R, which focus
 ## [Excel Project](https://github.com/marcie-analyst/analyst_projects/blob/main/Marsh%20Rabbit%20Project.xlsx)
 In the file Marsh Rabbit Project.xlsx you will find the link to an excel file (click "view raw") which focuses on demonstrating excel functions in a biological dataset.
 
-##[Biology Degree Projects]. 
+##.[Biological Degree Projects]

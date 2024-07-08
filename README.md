@@ -16,4 +16,5 @@ This poster presentation was a solo research project where data was collected an
 ## [Corvid Abundance Study](https://github.com/marcie-analyst/analyst_projects/blob/main/Corvid%20Abundance%20Study.pdf)
 This poster presentation looked at abundance of crows and ravens across habitat types.
 
-## [Coursera Google Data Analytics Certificate] 
+## [Coursera Google Data Analytics Certificate] (https://github.com/marcie-analyst/analyst_projects/blob/main/Coursera%20Certificate.pdf)
+Learning new things and keeping analytical concepts fresh in my mind is important to me.

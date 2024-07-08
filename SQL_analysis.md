@@ -61,7 +61,7 @@ average <- sqldf("SELECT Year, AVG(air_temp) as Avg_Temp
     ##   Year Avg_Temp
     ## 1 1989 72.21875
 
-## Question 3: What data had the safe range for drinking water, which consists of PH levels of 6.5 to 8.5?
+## Question 3: What data had the safe range for aquatic animal habitat, which consists of PH levels of 6.5 to 8.5?
 
 ``` r
 ph_levels <- sqldf("SELECT * 
@@ -106,7 +106,7 @@ ph_levels <- sqldf("SELECT *
     ## 9         10:00       <NA>         <NA>        <NA>        13.5 1994
     ## 10        10:00       <NA>         <NA>        <NA>        13.0 1994
 
-## Question 4: How many days a PH considered not drinkable water and a PH considered drinkable water?
+## Question 4: How many days was PH considered not drinkable water and a PH considered drinkable water?
 
 ``` r
 case_when_ph <- sqldf("SELECT COUNT(Read_Date) as total_days,

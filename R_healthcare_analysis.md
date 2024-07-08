@@ -6,14 +6,13 @@ R Studio Payer Type Project
 This dataset was found in the website
 <https://data.ca.gov/dataset/healthcare-payments-data-hpd-healthcare-measures>.
 Created by the Department of Health Care Access and Information, this
-dataset investigates health conditions, utilization of healthcare, and demographics of Californians under Covered California. 
-I selected this dataset because I was interested in seeing the relationship between diseases and
+dataset is about blah blah. The purpose of using this dataset was
+because I was interested in seeing the relationship with diseases and
 pay types. I wanted to investigate if there were descriptive differences
 through the different payor type and the health diagnosis of the
-patients. Specifically, I wanted to demonstrate my ability to use R to
-manipulate data, create metrics such as weighted means, and to take
-into account what illnesses have the highest prevalence in the population.
-
+patients. Specifically I wanted to demonstrate my capacity to use R to
+manipulate the data, creating metrics such as weighted means to take
+into account blah blah,
 
 #### Joining Files
 
@@ -92,24 +91,26 @@ q3 <- health_df %>%
   group_by(measure_name) %>% 
   summarise(total_count = as.integer(sum(measure_numerator, na.rm = TRUE)),
             total_whole = as.integer(sum(measure_denominator, na.rm = TRUE)),
-            percentage = round(total_count/total_whole, digits = 4) * 100) %>% 
+            percentage = round(total_count/total_whole, digits = 4) * 100,
+            total_count = comma(total_count),
+            total_whole = comma(total_whole))%>% 
   arrange(desc(percentage)) %>% 
   ungroup()
 ```
 
     ## # A tibble: 29 × 4
     ##    measure_name                               total_count total_whole percentage
-    ##    <chr>                                            <int>       <int>      <dbl>
-    ##  1 High Blood Pressure (Hypertension) Preval…     4475565    31947574      14.0 
-    ##  2 High Cholesterol (Hyperlipidemia) Prevale…     4089177    31947574      12.8 
-    ##  3 Anxiety Prevalence                             2572781    31947574       8.05
-    ##  4 Depression, Bipolar, or Other Depressive …     2537011    31947574       7.94
-    ##  5 Diabetes Prevalence                            2431897    31947574       7.61
-    ##  6 Obesity Prevalence                             2366404    31947574       7.41
-    ##  7 Rheumatoid Arthritis/Osteoarthritis Preva…     1890674    31947574       5.92
-    ##  8 Asthma Prevalence                              1359819    31947574       4.26
-    ##  9 Anemia Prevalence                              1345333    31947574       4.21
-    ## 10 Chronic Kidney Disease Prevalence              1040959    31947574       3.26
+    ##    <chr>                                      <chr>       <chr>            <dbl>
+    ##  1 High Blood Pressure (Hypertension) Preval… 4,475,565   31,947,574       14.0 
+    ##  2 High Cholesterol (Hyperlipidemia) Prevale… 4,089,177   31,947,574       12.8 
+    ##  3 Anxiety Prevalence                         2,572,781   31,947,574        8.05
+    ##  4 Depression, Bipolar, or Other Depressive … 2,537,011   31,947,574        7.94
+    ##  5 Diabetes Prevalence                        2,431,897   31,947,574        7.61
+    ##  6 Obesity Prevalence                         2,366,404   31,947,574        7.41
+    ##  7 Rheumatoid Arthritis/Osteoarthritis Preva… 1,890,674   31,947,574        5.92
+    ##  8 Asthma Prevalence                          1,359,819   31,947,574        4.26
+    ##  9 Anemia Prevalence                          1,345,333   31,947,574        4.21
+    ## 10 Chronic Kidney Disease Prevalence          1,040,959   31,947,574        3.26
     ## # ℹ 19 more rows
 
 ### Question 3: Analysis
@@ -128,28 +129,27 @@ q4 <- health_df %>%
             total_whole = as.integer(sum(measure_denominator, na.rm = TRUE)),
             percentage = round(total_count/total_whole, digits = 4) * 100) %>% 
   group_by(payer_type) %>% 
-  mutate(stand_percentage = scale(percentage),
-         stand_percentage = round(stand_percentage, digits = 2)) %>% 
+  mutate(stand_percent = scale(percentage),
+         stand_percent = round(stand_percent, digits = 2)) %>% 
   arrange(desc(percentage)) %>% 
   ungroup() %>% 
   select(-measure_name)
 ```
 
     ## # A tibble: 174 × 6
-    ##    county_name payer_type total_count total_whole percentage
-    ##    <chr>       <chr>            <int>       <int>      <dbl>
-    ##  1 Tulare      Medicare         12200       18498       66.0
-    ##  2 Kings       Medicare          3014        4588       65.7
-    ##  3 San Joaquin Medicare         29461       45357       65.0
-    ##  4 Glenn       Medicare           196         307       63.8
-    ##  5 Madera      Medicare          5790        9240       62.7
-    ##  6 Fresno      Medicare         28007       44860       62.4
-    ##  7 Lassen      Medicare           127         206       61.6
-    ##  8 Imperial    Medicare          2295        3809       60.2
-    ##  9 Sutter      Medicare          1244        2070       60.1
-    ## 10 Solano      Medicare         25251       42227       59.8
+    ##    county_name payer_type total_count total_whole percentage stand_percent[,1]
+    ##    <chr>       <chr>            <int>       <int>      <dbl>             <dbl>
+    ##  1 Tulare      Medicare         12200       18498       66.0              1.25
+    ##  2 Kings       Medicare          3014        4588       65.7              1.23
+    ##  3 San Joaquin Medicare         29461       45357       65.0              1.18
+    ##  4 Glenn       Medicare           196         307       63.8              1.1 
+    ##  5 Madera      Medicare          5790        9240       62.7              1.02
+    ##  6 Fresno      Medicare         28007       44860       62.4              1   
+    ##  7 Lassen      Medicare           127         206       61.6              0.94
+    ##  8 Imperial    Medicare          2295        3809       60.2              0.84
+    ##  9 Sutter      Medicare          1244        2070       60.1              0.83
+    ## 10 Solano      Medicare         25251       42227       59.8              0.81
     ## # ℹ 164 more rows
-    ## # ℹ 1 more variable: stand_percentage <dbl[,1]>
 
 ### Question 4: Analysis
 
@@ -171,7 +171,8 @@ required to quantify the true difference.
 ``` r
 q5 <- q4 %>% 
   group_by(county_name) %>% 
-  summarise(weighted_average = sum((percentage * total_whole), na.rm = TRUE)/sum(total_whole, na.rm = TRUE)) %>% 
+  summarise(weighted_average = sum((percentage * total_whole), na.rm = TRUE)/sum(total_whole, na.rm = TRUE),
+            weighted_average = round(weighted_average, digits = 2)) %>% 
   arrange(desc(weighted_average))
 ```
 
@@ -181,13 +182,13 @@ q5 <- q4 %>%
     ##  1 Amador                  19.3
     ##  2 Tuolumne                18.5
     ##  3 Imperial                17.4
-    ##  4 Modoc                   17.3
+    ##  4 Modoc                   17.4
     ##  5 Calaveras               17.3
     ##  6 Lake                    17.3
     ##  7 Del Norte               17.0
     ##  8 Mariposa                16.6
-    ##  9 Lassen                  16.4
-    ## 10 Kings                   16.4
+    ##  9 Kings                   16.4
+    ## 10 Lassen                  16.4
     ## # ℹ 48 more rows
 
 ### Question 5: Analysis
@@ -200,23 +201,16 @@ Using the weighted average this table shows how
 q6 <- health_df %>% 
   filter(reporting_year == "2021" & measure_name %in% c("Commercial Enrollment Rate","Medicare Enrollment Rate","Medi-Cal Enrollment Rate")) %>% 
   group_by(payer_type) %>%
-  summarise(total_count = as.integer(sum(measure_numerator, na.rm = TRUE))) 
+  summarise(total_count = as.integer(sum(measure_numerator, na.rm = TRUE)),
+            total_count = comma(round(total_count, digits = 2)))
 ```
 
-    ## # A tibble: 58 × 2
-    ##    county_name weighted_average
-    ##    <chr>                  <dbl>
-    ##  1 Amador                  19.3
-    ##  2 Tuolumne                18.5
-    ##  3 Imperial                17.4
-    ##  4 Modoc                   17.3
-    ##  5 Calaveras               17.3
-    ##  6 Lake                    17.3
-    ##  7 Del Norte               17.0
-    ##  8 Mariposa                16.6
-    ##  9 Lassen                  16.4
-    ## 10 Kings                   16.4
-    ## # ℹ 48 more rows
+    ## # A tibble: 3 × 2
+    ##   payer_type total_count
+    ##   <chr>      <chr>      
+    ## 1 Commercial 14,743,491 
+    ## 2 Medi-Cal   14,022,861 
+    ## 3 Medicare   3,181,222
 
 ### Question 6: Analysis
 

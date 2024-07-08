@@ -10,6 +10,7 @@ PH ranges from 0-14, with 7 being considered neutral like drinkable water, 2 bei
 and 12 considered basic such as soap. Fluctuating pH in a stream can be an indicator of increasing pollution, so 
 maintaining a stable PH range of about 6.5-9 in a natural fresh water source is extremely important.  If freshwater 
 falls out of that range it can decrease reproduction, stunt growth, and introduce disease to the organisms that reside there. 
+
 The purpose of using this dataset was to utilize data that is important to me to showcase my ability in understanding and 
 using SQL to clean data, aggregate metrics such as averages, and use functions such as wildcards and case whens to find if 
 the water quality variables like PH are at unsafe levels for this dataset. 

@@ -127,24 +127,26 @@ q4 <- health_df %>%
             total_whole = as.integer(sum(measure_denominator, na.rm = TRUE)),
             percentage = round(total_count/total_whole, digits = 4) * 100) %>% 
   group_by(payer_type) %>% 
-  mutate(stand_percentage = scale(percentage)) %>% 
+  mutate(stand_percentage = scale(percentage),
+         stand_percentage = round(stand_percentage, digits = 2)) %>% 
   arrange(desc(percentage)) %>% 
-  ungroup()
+  ungroup() %>% 
+  select(-measure_name)
 ```
 
-    ## # A tibble: 174 × 7
-    ##    county_name measure_name        payer_type total_count total_whole percentage
-    ##    <chr>       <chr>               <chr>            <int>       <int>      <dbl>
-    ##  1 Tulare      High Blood Pressur… Medicare         12200       18498       66.0
-    ##  2 Kings       High Blood Pressur… Medicare          3014        4588       65.7
-    ##  3 San Joaquin High Blood Pressur… Medicare         29461       45357       65.0
-    ##  4 Glenn       High Blood Pressur… Medicare           196         307       63.8
-    ##  5 Madera      High Blood Pressur… Medicare          5790        9240       62.7
-    ##  6 Fresno      High Blood Pressur… Medicare         28007       44860       62.4
-    ##  7 Lassen      High Blood Pressur… Medicare           127         206       61.6
-    ##  8 Imperial    High Blood Pressur… Medicare          2295        3809       60.2
-    ##  9 Sutter      High Blood Pressur… Medicare          1244        2070       60.1
-    ## 10 Solano      High Blood Pressur… Medicare         25251       42227       59.8
+    ## # A tibble: 174 × 6
+    ##    county_name payer_type total_count total_whole percentage
+    ##    <chr>       <chr>            <int>       <int>      <dbl>
+    ##  1 Tulare      Medicare         12200       18498       66.0
+    ##  2 Kings       Medicare          3014        4588       65.7
+    ##  3 San Joaquin Medicare         29461       45357       65.0
+    ##  4 Glenn       Medicare           196         307       63.8
+    ##  5 Madera      Medicare          5790        9240       62.7
+    ##  6 Fresno      Medicare         28007       44860       62.4
+    ##  7 Lassen      Medicare           127         206       61.6
+    ##  8 Imperial    Medicare          2295        3809       60.2
+    ##  9 Sutter      Medicare          1244        2070       60.1
+    ## 10 Solano      Medicare         25251       42227       59.8
     ## # ℹ 164 more rows
     ## # ℹ 1 more variable: stand_percentage <dbl[,1]>
 

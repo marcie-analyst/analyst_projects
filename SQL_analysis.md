@@ -8,7 +8,7 @@ This dataset was found in the website
 One important metric used to assess water quality is PH, which is a measure of how acidic/basic something is. 
 PH ranges from 0-14, with 7 being considered neutral like drinkable water, 2 being considered acidic such as lemon,
 and 12 considered basic such as soap. Fluctuating pH in a stream can be an indicator of increasing pollution, so 
-maintaining a stable PH range of about 6.5-9 in a natural fresh water source is extremely important.  If freshwater 
+maintaining a stable PH range of about 6.5-8.5 in a natural fresh water source is extremely important.  If freshwater 
 falls out of that range it can decrease reproduction, stunt growth, and introduce disease to the organisms that reside there. 
 
 The purpose of using this dataset was to utilize data that is important to me to showcase my ability in understanding and 

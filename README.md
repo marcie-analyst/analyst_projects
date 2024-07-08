@@ -17,4 +17,4 @@ This poster presentation was a solo research project where data was collected an
 This poster presentation looked at abundance of crows and ravens across habitat types.
 
 ## [Google Data Analytics Professional Certificate](https://github.com/marcie-analyst/analyst_projects/blob/main/Coursera%20Certificate.pdf)
-Learning new skills and keeping analytical concepts fresh in my mind is important to me. This certificate program entails how to prepare, clean, analyze, and visualize data through programming languages SQL, Excel, and R. 
+Learning new skills and keeping analytical concepts fresh in my mind is important to me. This certificate program entails how to prepare, clean, analyze, and visualize data through programmings like SQL, Excel, and R. 

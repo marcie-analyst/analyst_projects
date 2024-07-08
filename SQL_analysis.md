@@ -5,20 +5,15 @@ Sql Project Water Quality
 
 This dataset was found in the website
 <https://catalog.data.gov/dataset/water-quality-data-41c5e/resource/c013c8da-49d3-4898-93a5-f6c0f0e95a0d>.
-One of the metrics that are used to access water quality is PH, which is
-a measure of how acidic/basic water is. PH ranges from 0-14, for example
-drinkable water has a PH of 7 which is considered neutral, lemon has PH
-of 2 which is considered acidic and lastly soap has a PH of 12 which is
-considered basic. The importance of PH in water quality is extremely
-important, PH accounts for solubility and biological availability. The
-levels of PH affect the organisms living in the water, moreso
-fluctuating pH in a stream can be an indicator of increasing pollution.
-The purpose of using this dataset was because I was interested in
-investigating the relationship of PH levels and other variables such as
-temperature. Specifically I wanted to showcase my ability in
-understanding and using SQL to clean data, aggregate metrics such as
-averages, using functions such as wildcards and case whens to take into
-account blah blah.
+One important metric used to assess water quality is PH, which is a measure of how acidic/basic something is. 
+PH ranges from 0-14, with 7 being considered neutral like drinkable water, 2 being considered acidic such as lemon,
+and 12 considered basic such as soap. Fluctuating pH in a stream can be an indicator of increasing pollution, so 
+maintaining a stable PH range of about 6.5-9 in a natural fresh water source is extremely important.  If freshwater 
+falls out of that range it can decrease reproduction, stunt growth, and introduce disease to the organisms that reside there. 
+The purpose of using this dataset was to utilize data that is important to me to showcase my ability in understanding and 
+using SQL to clean data, aggregate metrics such as averages, and use functions such as wildcards and case whens to find if 
+the water quality variables like PH are at unsafe levels for this dataset. 
+
 
 ``` r
 head(df_water)

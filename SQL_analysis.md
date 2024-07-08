@@ -5,20 +5,16 @@ Sql Project Water Quality
 
 This dataset was found in the website
 <https://catalog.data.gov/dataset/water-quality-data-41c5e/resource/c013c8da-49d3-4898-93a5-f6c0f0e95a0d>.
-One of the metrics that are used to access water quality is PH, which is
-a measure of how acidic/basic water is. PH ranges from 0-14, for example
-drinkable water has a PH of 7 which is considered neutral, lemon has PH
-of 2 which is considered acidic and lastly soap has a PH of 12 which is
-considered basic. The importance of PH in water quality is extremely
-important, PH accounts for solubility and biological availability. The
-levels of PH affect the organisms living in the water, moreso
-fluctuating pH in a stream can be an indicator of increasing pollution.
-The purpose of using this dataset was because I was interested in
-investigating the relationship of PH levels and other variables such as
-temperature. Specifically I wanted to showcase my ability in
-understanding and using SQL to clean data, aggregate metrics such as
-averages, using functions such as wildcards and case whens to take into
-account blah blah.
+One important metric used to assess water quality is PH, which is a measure of how acidic/basic something is. 
+PH ranges from 0-14, with 7 being considered neutral like drinkable water, 2 being considered acidic such as lemon,
+and 12 considered basic such as soap. Fluctuating pH in a stream can be an indicator of increasing pollution, so 
+maintaining a stable PH range of about 6.5-8.5 in a natural fresh water source is extremely important.  If freshwater 
+falls out of that range it can decrease reproduction, stunt growth, and introduce disease to the organisms that reside there. 
+
+The purpose of using this dataset was to utilize data that is important to me to showcase my ability in understanding and 
+using SQL to clean data, aggregate metrics such as averages, and use functions such as wildcards and case whens to find if 
+water quality variables like PH are at unsafe levels for this dataset. 
+
 
 ``` r
 head(df_water)
@@ -65,7 +61,7 @@ average <- sqldf("SELECT Year, AVG(air_temp) as Avg_Temp
     ##   Year Avg_Temp
     ## 1 1989 72.21875
 
-## Question 3: What data had the safe range for drinking water, which consists of PH levels of 6.5 to 8.5?
+## Question 3: What data had the safe range for aquatic animal habitat, which consists of PH levels of 6.5 to 8.5?
 
 ``` r
 ph_levels <- sqldf("SELECT * 
@@ -110,7 +106,7 @@ ph_levels <- sqldf("SELECT *
     ## 9         10:00       <NA>         <NA>        <NA>        13.5 1994
     ## 10        10:00       <NA>         <NA>        <NA>        13.0 1994
 
-## Question 4: How many days a PH considered not drinkable water and a PH considered drinkable water?
+## Question 4: How many days was PH considered not drinkable water and a PH considered drinkable water?
 
 ``` r
 case_when_ph <- sqldf("SELECT COUNT(Read_Date) as total_days,

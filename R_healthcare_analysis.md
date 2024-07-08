@@ -6,13 +6,15 @@ R Studio Payer Type Project
 This dataset was found in the website
 <https://data.ca.gov/dataset/healthcare-payments-data-hpd-healthcare-measures>.
 Created by the Department of Health Care Access and Information, this
-dataset is about blah blah. The purpose of using this dataset was
-because I was interested in seeing the relationship with diseases and
-pay types. I wanted to investigate if there were descriptive differences
-through the different payor type and the health diagnosis of the
-patients. Specifically I wanted to demonstrate my capacity to use R to
-manipulate the data, creating metrics such as weighted means to take
-into account blah blah,
+dataset investigates health conditions, utilization of healthcare, and
+demographics of Californians under Covered California. I selected this
+dataset because I was interested in seeing the relationship between
+diseases and pay types. I wanted to investigate if there were
+descriptive differences through the different payor type and the health
+diagnosis of the patients. Specifically, I wanted to demonstrate my
+ability to use R to manipulate data, create metrics such as weighted
+means, and to take into account what illnesses have the highest
+prevalence in the population
 
 #### Joining Files
 
@@ -81,7 +83,7 @@ q2 <- health_df %>%
 
 ### Question 2: Analysis
 
-As we can see from the plots blah blah blah
+As we can see from the plots add in more details.
 
 ## Question 3: In the year of 2021 what are the measures percentage?
 

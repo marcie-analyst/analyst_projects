@@ -3,18 +3,18 @@ R Studio Payer Type Project
 
 ### About the datatset
 
-This dataset was found in the website
+This dataset was found on the website
 <https://data.ca.gov/dataset/healthcare-payments-data-hpd-healthcare-measures>.
 Created by the Department of Health Care Access and Information, this
-dataset investigates health conditions, utilization of healthcare, and
+dataset investigates health conditions, healthcare utilization, and
 demographics of Californians under Covered California. I selected this
-dataset because I was interested in seeing the relationship between
-diseases and pay types. I wanted to investigate if there were
-descriptive differences through the different payor type and the health
-diagnosis of the patients. Specifically, I wanted to demonstrate my
-ability to use R to manipulate data, create metrics such as weighted
-means, and to take into account what illnesses have the highest
-prevalence in the population
+dataset because I was interested in seeing the differences between
+utilization depending on California counties. I also wanted to
+investigate what the main reason for ER visits was and if there were any
+descriptive differences through various payer types. Specifically, I
+wanted to demonstrate my ability to use R to manipulate data, create
+metrics such as weighted means, and to take into account what illnesses
+have the highest prevalence in the population.
 
 #### Joining Files
 
@@ -45,7 +45,7 @@ head(health_df)
     ## #   `Measure Category` <chr>, `Measure Description` <chr>,
     ## #   `Numerator Definition` <chr>, `Denominator Definition` <chr>
 
-## Question 1: In the year 2021, which counties are among the top 15 which had the highest number of ED visit rates?
+## Question 1: In 2021, which counties were among the top 15 highest number of Emergency Department visit rates?
 
 ``` r
 q1 <- health_df %>% 
@@ -64,10 +64,13 @@ q1 <- health_df %>%
 ### Question 1: Analysis
 
 From the plot we can observe that the counties with the highest
-Emergency Department visits, are all counties where there is the highest
-population concentrations. This is expected with our results.
+Emergency Department visits are those that have the highest population
+concentrations. In 2021 Los Angeles County had a population of 9.8
+million compared to Solano county which had a population of 451,000. Due
+to the large difference in population, this is expected with our
+results.
 
-## Question 2: Out of those 15 county with the higest ED rates, what was the behavior of their payer type?
+## Question 2: Out of those 15 counties with the higest Emergency Department rates, what was the behavior of their payer type?
 
 ``` r
 q2 <- health_df %>% 
@@ -83,9 +86,16 @@ q2 <- health_df %>%
 
 ### Question 2: Analysis
 
-As we can see from the plots add in more details.
+As we can see from the plot, Medi-Cal was the largest payer type in
+every county. With more data than is provided in this dataset, it would
+be interesting to look into why state funded Medi-Cal is the most
+prevalent among the counties with the highest emergency department
+visits. I hypothesize that the general income of California would either
+mirror the plot ratios we see, or perhaps with how impacted the medical
+system in California is,the Emergency Department visits are higher due
+to long wait times to see a general care practitioner with Medi-Cal.
 
-## Question 3: In the year of 2021 what are the measures percentage?
+## Question 3: In the year of 2021 which illness has the highest percentage?
 
 ``` r
 q3 <- health_df %>% 
@@ -117,9 +127,14 @@ q3 <- health_df %>%
 
 ### Question 3: Analysis
 
-The highest percentage of a disease is High Blood pressure at 14%.
+The illness with the highest percentage is High Blood Pressure at 14%.
+Second is High Cholesterol at 12.8%, and Anxiety at 8%. These are
+interesting outcomes as High Blood Pressure and Anxiety can cause
+similar sensations in the body, and can affect each other. It is also
+interesting to note out of the top five greatest illnesses, two are
+mental illness.
 
-## Question 4: Since the disease with the highest percentage is High blood Pressure, are the percentages across payer types behaving similar within each county?
+## Question 4: Since the illness with the highest percentage is High Blood Pressure, are the percentages across payer types behaving similarly within each county?
 
 ### Standardizing percentages by using the standard deviation of the means from each payor type group
 
@@ -133,42 +148,40 @@ q4 <- health_df %>%
   group_by(payer_type) %>% 
   mutate(stand_percent = scale(percentage),
          stand_percent = round(stand_percent, digits = 2)) %>% 
-  arrange(desc(percentage)) %>% 
+  arrange(desc(stand_percent)) %>% 
   ungroup() %>% 
   select(-measure_name)
 ```
 
     ## # A tibble: 174 × 6
-    ##    county_name payer_type total_count total_whole percentage stand_percent[,1]
-    ##    <chr>       <chr>            <int>       <int>      <dbl>             <dbl>
-    ##  1 Tulare      Medicare         12200       18498       66.0              1.25
-    ##  2 Kings       Medicare          3014        4588       65.7              1.23
-    ##  3 San Joaquin Medicare         29461       45357       65.0              1.18
-    ##  4 Glenn       Medicare           196         307       63.8              1.1 
-    ##  5 Madera      Medicare          5790        9240       62.7              1.02
-    ##  6 Fresno      Medicare         28007       44860       62.4              1   
-    ##  7 Lassen      Medicare           127         206       61.6              0.94
-    ##  8 Imperial    Medicare          2295        3809       60.2              0.84
-    ##  9 Sutter      Medicare          1244        2070       60.1              0.83
-    ## 10 Solano      Medicare         25251       42227       59.8              0.81
+    ##    county_name   payer_type total_count total_whole percentage stand_percent[,1]
+    ##    <chr>         <chr>            <int>       <int>      <dbl>             <dbl>
+    ##  1 San Francisco Medi-Cal         39915      217909       18.3              2.34
+    ##  2 Modoc         Medi-Cal           617        3430       18.0              2.21
+    ##  3 Imperial      Medi-Cal         17416       97907       17.8              2.13
+    ##  4 Del Norte     Commercial        1330        7096       18.7              1.94
+    ##  5 Tuolumne      Medi-Cal          2483       14738       16.8              1.76
+    ##  6 Tuolumne      Commercial        2527       14847       17.0              1.42
+    ##  7 Lake          Medi-Cal          5608       35298       15.9              1.38
+    ##  8 Lassen        Commercial        1730       10338       16.7              1.33
+    ##  9 Calaveras     Commercial        2213       13292       16.7              1.3 
+    ## 10 Modoc         Commercial         236        1424       16.6              1.28
     ## # ℹ 164 more rows
 
 ### Question 4: Analysis
 
-For Example for LA just from the percentage it appears that Medicare has
-the highest percentage of cases. But the sizes of each payer type are
-different within each group, therefore we could be comparing apples to
-oranges, to make sure we can compare them by standardizing, we can see
-that the percentage of 42.81 for Medicare patients in LA is -0.410
-standard deviations below the mean percentage, for the whole Medicare
-group. The standardized percentage for Medicare being below the mean
-implies that the Medicare payer type in LA has a lower prevalence of
-High Blood Pressure compared to the average prevalence within the
-Medicare group. From observation the standardized percentage for
-Commercial is notably different. However, further analysis would be
-required to quantify the true difference.
+Standardization is important because based on percentages, it appears
+that San Francisco Medi-Cal has a lower percentage of high blood
+pressure cases. But the sizes of each payer type are different within
+each group, therefore we could be comparing apples to oranges. To ensure
+there is an actual difference between populations, we can compare them
+by standardizing the data. For example, when standard deviation is
+applied, San Francisco actually has a higher prevalence of high blood
+pressure with an SD of 2.34.Meaning that the even though percentage
+wise, 18% doesn’t look very high, compared to the mean, San Francisco’s
+Medi-cal has greater rates of High Blood Pressure.
 
-## Question 5: What is the overall burden percentage of High blood Pressure by population?
+## Question 5: What is the overall weighted average percentage of High Blood Pressure by population?
 
 ``` r
 q5 <- q4 %>% 
@@ -195,9 +208,17 @@ q5 <- q4 %>%
 
 ### Question 5: Analysis
 
-Using the weighted average this table shows how
+Utilizing weighted average helps in understanding the prevalence of this
+illness per county by adjusting for the varying numbers of people
+covered by the three payer types. Weighted average helps to provide a
+more accurate overall percentage that reflects the county as a whole
+rather than treating each payer type equally regardless of the
+population size. Because of this, we can see that Amador county has
+approximately 19.31% of it’s population having High Blood Pressure.
+Without the weighted average, these reflections of High Blood Pressure
+prevalence in each county shown may not have been as accurate.
 
-## Question 6: In the year 2021 what was the count of individuals by payer type?
+## Question 6: In the year 2021 what was the total rate of individuals by payer type?
 
 ``` r
 q6 <- health_df %>% 
@@ -216,4 +237,8 @@ q6 <- health_df %>%
 
 ### Question 6: Analysis
 
-The count of individuals per group was blah blah something analytically
+The rate of individuals per payer type shows that Commercial and
+Medi-Cal had the highest utilization during this calendar year. This
+makes sense in that Medicare is utilized by elderly people which made up
+about %14 of California’s population in 2021, accounting for an expected
+lower rate of utilization.
